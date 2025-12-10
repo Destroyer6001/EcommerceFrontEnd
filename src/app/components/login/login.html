@@ -1,0 +1,30 @@
+<div class="body">
+  <div class="content">
+    <div class="imageContainer">
+      <img [ngSrc]="imgSrc" class="profileImage" height="120" width="120" alt="user">
+    </div>
+    <h2 class="contentTitle">Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="fullWidth">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Ingrese su correo electrónico" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="fullWidth">
+        <mat-label>Contraseña</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="Ingrese su contraseña"
+          formControlName="password"
+        />
+      </mat-form-field>
+      <button mat-flat-button color="primary" class="fullWidth button" type="submit">Iniciar Sesion</button>
+    </form>
+
+    <p class="mt-2 text-left">
+      ¿No tienes cuenta?
+      <a routerLink="/register">Registrate aqui</a>
+    </p>
+  </div>
+</div>

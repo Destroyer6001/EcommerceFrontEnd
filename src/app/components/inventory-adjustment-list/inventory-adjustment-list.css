@@ -1,0 +1,46 @@
+.table-container {
+  height: 350px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: block;
+}
+
+.table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 87%;
+  margin: 9px
+}
+
+.header {
+  margin-bottom: 10px;
+}
+
+.th .td {
+  width:25%;
+}
+
+.btnEdit .btnDelete
+{
+  cursor: pointer;
+}
+
+.btnDelete {
+  color: red;
+}
+
+.btnEdit
+{
+  color:yellow;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.title-with-icon mat-icon
+{
+  margin-right: 8px;
+  vertical-align: middle;
+}

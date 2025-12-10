@@ -1,0 +1,90 @@
+<h2 mat-dialog-title>{{title}} Productos</h2>
+
+<form [formGroup]="formProduct" (ngSubmit)="saveChanges()">
+  <mat-dialog-content>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullwidth">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name" placeholder="Ingrese el nombre del producto">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullwidth">
+          <mat-label>Descripcion</mat-label>
+          <input matInput formControlName="description" placeholder="Ingrese la descripcion del produco">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullwidth">
+          <mat-label>Fecha De Creacion</mat-label>
+          <input matInput formControlName="date" [matDatepicker]="picker">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <div class="column">
+          <mat-form-field appearance="outline" class="fullwidth">
+            <mat-label>Stock</mat-label>
+            <input matInput formControlName="stock" placeholder="Ingrese la cantidad actual del producto">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullwidth">
+          <mat-label>Precio Unitario</mat-label>
+          <input matInput formControlName="sale" placeholder="Ingrese el precio unitario">
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullwidth">
+          <mat-label>Precio de venta</mat-label>
+          <input matInput formControlName="salePrice" placeholder="Ingrese el precio de venta">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullwidth">
+          <mat-label>Categoria</mat-label>
+          <mat-select formControlName="categoryId">
+            <mat-option [value]="0">Seleccione una categoria</mat-option>
+            @for (category of categories; track category.id)
+            {
+              <mat-option [value]="category.id">{{category.name}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <input
+          type="file"
+          accept="image/*"
+          hidden
+          #fileInput
+          (change)="onFileSelected($event)"
+        >
+        <button mat-raised-button color="primary" type="button" (click)="fileInput.click()">
+          Seleccionar imagen
+        </button>
+        @if(imgPreview != '')
+        {
+          <img [src]="imgPreview" alt="Vista previa" width="200" style="border-radius: 10px">
+        }
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton mat-dialog-close (click)="closeModal()">Cancelar</button>
+    <button matButton type="submit" cdkFocusInitial>Guardar Cambios</button>
+  </mat-dialog-actions>
+</form>

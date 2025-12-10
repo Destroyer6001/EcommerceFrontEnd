@@ -1,0 +1,42 @@
+.table-container {
+  height: 365px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: block;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 90%;
+  margin: 9px;
+}
+
+.header {
+  margin-bottom: 10px;
+}
+
+td, th {
+  width: 25%;
+}
+
+.btnEdit .btnDelete .btnInventory {
+  cursor: pointer;
+}
+
+.btnDelete {
+  color: red;
+  margin-right: 1px;
+}
+
+.btnInventory {
+  color: blue;
+}
+
+.btnEdit {
+  color: yellow;
+  margin-right: 1px;
+}

@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>{{title}} Categoria</h2>
+
+<form [formGroup]="categoryForm" (ngSubmit)="SaveChanges()">
+  <mat-dialog-content>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name" placeholder="Ingrese el nombre de la categoria">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Descripcion</mat-label>
+          <textarea matInput formControlName="description" placeholder="Ingrese la descripcion"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton mat-dialog-close (click)="closeModal()">Cancelar</button>
+    <button matButton type="submit" cdkFocusInitial>Guardar Cambios</button>
+  </mat-dialog-actions>
+</form>

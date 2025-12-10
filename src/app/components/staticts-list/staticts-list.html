@@ -1,0 +1,50 @@
+<div class="dashboard-header">
+  <h1 class="dashboard-title">Dashboard de Reportes</h1>
+  <p class="dashboard-subtitle">Análisis y métricas de ventas</p>
+</div>
+<mat-grid-list cols="2" rowHeight="300px" gutterSize="20px">
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Reporte Ventas Totales Por Producto</mat-card-title>
+      <div class="chart-container">
+        <canvas id="MaxSalesProduct"></canvas>
+      </div>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Reporte Ganancias Totales Por Producto</mat-card-title>
+      <div class="pie-chart-container">
+        <canvas id="EarningsProduct"></canvas>
+      </div>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Reporte Ventas Totales por Categoria</mat-card-title>
+      <div class="chart-container">
+        <canvas id="MaxSalesCategories"></canvas>
+      </div>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Reporte Ganancias Totales por Categoria</mat-card-title>
+      <div class="pie-chart-container">
+        <canvas id="EarningsCategories"></canvas>
+      </div>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="1" rowspan="1">
+    <mat-card>
+      <mat-card-title>Reporte Estado De Órdenes</mat-card-title>
+      <div class="chart-container" style="height: calc(100% - 40px);">
+        <canvas id="StatesOrders"></canvas>
+      </div>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

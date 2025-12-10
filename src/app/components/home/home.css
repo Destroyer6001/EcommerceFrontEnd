@@ -1,0 +1,17 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.bottonSpacer {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.toolbar {
+  background-color: blue;
+  color: white;
+}
+
+.button {
+  color: white;
+}

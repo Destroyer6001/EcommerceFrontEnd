@@ -1,0 +1,25 @@
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.column {
+  flex:50%;
+  display: flex;
+}
+
+.fullwidth {
+  width: 100%;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-wrapper {
+  padding: 0;
+}
+
+.mediumWidth {
+  width: 70%
+}

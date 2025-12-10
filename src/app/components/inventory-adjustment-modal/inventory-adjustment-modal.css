@@ -1,0 +1,22 @@
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.column {
+  flex: 50%;
+  display: flex;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-wrapper {
+  padding: 0;
+}
+

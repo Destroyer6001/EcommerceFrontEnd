@@ -1,0 +1,24 @@
+<mat-toolbar class="toolbar">
+  <button matIconButton class="example-icon button" [matMenuTriggerFor]="menu" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    @if (isAdminRole)
+    {
+      <button mat-menu-item (click)="redirectLink('/home/adminList')">Panel de administradores</button>
+      <button mat-menu-item (click)="redirectLink('/home/categoryList')">Categorias de producto</button>
+      <button mat-menu-item (click)="redirectLink('/home/productList')">Productos</button>
+      <button mat-menu-item (click)="redirectLink('/home/ordersList')">Ordenes</button>
+      <button mat-menu-item (click)="redirectLink('/home/statictsList')">Reportes</button>
+    }
+  </mat-menu>
+  <span>Ecommerce</span>
+  <span class="example-spacer"></span>
+  <button matIconButton (click)="openDialog()" class="example-icon bottonSpacer button">
+    <mat-icon>manage_accounts</mat-icon>
+  </button>
+  <button matIconButton (click)="Logout()" class="example-icon bottonSpacer button">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>
+<router-outlet></router-outlet>

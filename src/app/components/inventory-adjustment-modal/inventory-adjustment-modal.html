@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>{{title}} Ajuste De Inventario: {{productName}}</h2>
+<form [formGroup]="formInventoryAdjustment" (ngSubmit)="saveChanges()">
+  <mat-dialog-content>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Cantidad Actual</mat-label>
+          <input matInput formControlName="quantityProduct" placeholder="Ingrese la cantidad actual del producto">
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Cantidad a cargar</mat-label>
+          <input matInput formControlName="stock" (keyup)="changeValueInput($event)" placeholder="Ingrese la cantidad a actualizar">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Precio Unidad</mat-label>
+          <input matInput formControlName="price" placeholder="Ingrese el precio de la unidad">
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Cantidad final</mat-label>
+          <input matInput formControlName="productNewQuantity" placeholder="Ingrese la cantidad final del producto">
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="closeModal()">Cancelar</button>
+    <button matButton type="submit" cdkFocusInitial>Guardar cambios</button>
+  </mat-dialog-actions>
+</form>

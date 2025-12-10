@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>Editar Usuario</h2>
+<form [formGroup]="editForm" (ngSubmit)="updateUser()">
+  <mat-dialog-content class="mat-typography">
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Nombre de Usuario</mat-label>
+          <input matInput formControlName="username" placeholder="Ingrese el nombre del usuario">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="mediumWidth">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="firstname" placeholder="Ingrese su nombre">
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="outline" class="mediumWidth">
+          <mat-label>Apellidos</mat-label>
+          <input matInput formControlName="lastname" placeholder="Ingrese los apellidos">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="Ingrese el email">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="mediumWidth">
+          <mat-label>Direccion</mat-label>
+          <input matInput formControlName="address" placeholder="Ingrese la direccion">
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="outline" class="mediumWidth">
+          <mat-label>Telefono</mat-label>
+          <input matInput formControlName="cellphone" placeholder="Ingrese el numero de telefono">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Contraseña</mat-label>
+          <input matInput formControlName="password" type="password" placeholder="Ingrese la nueva contraseña">
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton mat-dialog-close (click)="closeModal()">Cancelar</button>
+    <button matButton [mat-dialog-close]="true" type="submit" cdkFocusInitial>Guardar Cambios</button>
+  </mat-dialog-actions>
+</form>

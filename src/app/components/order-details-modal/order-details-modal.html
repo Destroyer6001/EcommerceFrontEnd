@@ -1,0 +1,76 @@
+<h2 mat-dialog-title class="title-with-icon">
+  <mat-icon (click)="closeModal()" matTooltip="Regresar">arrow_back</mat-icon>
+  Detalle de la orden
+</h2>
+
+<form [formGroup]="formDetails">
+  <mat-dialog-content>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Usuario</mat-label>
+          <input matInput formControlName="userName">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Fecha de orde</mat-label>
+          <input matInput formControlName="date" [matDatepicker]="picker">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Direccion</mat-label>
+          <input matInput formControlName="address">
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Estado</mat-label>
+          <input matInput formControlName="state">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Total</mat-label>
+          <input matInput formControlName="total">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <div class="table-container mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="productName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>producto</th>
+              <td mat-cell *matCellDef="let row">{{row.productName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="stock">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>cantidad</th>
+              <td mat-cell *matCellDef="let row">{{row.stock}}</td>
+            </ng-container>
+            <ng-container matColumnDef="salePrice">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>precio de venta</th>
+              <td mat-cell *matCellDef="let row">{{row.salePrice | number: '1.2-2'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>total</th>
+              <td mat-cell *matCellDef="let row">{{row.totalProduct | number: '1.2-2'}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns sticky:true"></tr>
+            <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Select page products"></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+</form>

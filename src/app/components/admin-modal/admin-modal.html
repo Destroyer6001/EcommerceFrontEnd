@@ -1,0 +1,62 @@
+<h2 mat-dialog-title>{{title}} Usuario</h2>
+
+<form [formGroup]="formUser" (ngSubmit)="SaveChangesUser()">
+  <mat-dialog-content>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullwidth">
+          <mat-label>Nombre de usuario</mat-label>
+          <input matInput formControlName="username" placeholder="Ingrese su nombre de usuario">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="firstname" placeholder="Ingrese sus nombres">
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Apellidos</mat-label>
+          <input matInput formControlName="lastname" placeholder="Ingrese sus apellidos">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="Ingrese su email">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Telefono</mat-label>
+          <input matInput formControlName="phone" placeholder="Ingrese su numero celular">
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Direccion</mat-label>
+          <input matInput formControlName="address" placeholder="Ingrese su direccion">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="fullWidth">
+          <mat-label>Contraseña</mat-label>
+          <input type="password" matInput formControlName="password">
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton mat-dialog-close (click)="closeModal()">Cancelar</button>
+    <button matButton type="submit" cdkFocusInitial>Guardar Cambios</button>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,64 @@
+<div class="body">
+  <div class="content">
+    <h1 class="contentTitle">Registrar Usuario</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="outline" class="fullWidth">
+            <mat-label>Nombre De Usuario</mat-label>
+            <input matInput formControlName="username" placeholder="Ingrese el nombre de usuario">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="outline" class="mediumWidth">
+            <mat-label>Nombres</mat-label>
+            <input matInput formControlName="firstname" placeholder="Ingrese los nombres">
+          </mat-form-field>
+        </div>
+        <div class="column">
+          <mat-form-field appearance="outline" class="mediumWidth">
+            <mat-label>Apellidos</mat-label>
+            <input matInput formControlName="lastname" placeholder="Ingrese los apellidos">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="outline" class="fullWidth">
+            <mat-label>Correo</mat-label>
+            <input matInput formControlName="email" placeholder="Ingrese el email">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="outline" class="mediumWidth">
+            <mat-label>Telefono</mat-label>
+            <input matInput formControlName="cellphone" placeholder="Ingrese el numero de telefono">
+          </mat-form-field>
+        </div>
+        <div class="column">
+          <mat-form-field appearance="outline" class="mediumWidth">
+            <mat-label>Direccion</mat-label>
+            <input matInput formControlName="address" placeholder="Ingrese su direccion">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="outline" class="fullWidth">
+            <mat-label>Contraseña</mat-label>
+            <input matInput formControlName="password" type="password" placeholder="Ingrese su contraseña">
+          </mat-form-field>
+        </div>
+      </div>
+      <button mat-flat-button color="primary" class="fullWidth buttons" type="submit">Registrar</button>
+    </form>
+    <p class="mt-2 text-left">
+      ¿Ya tienes cuenta?
+      <a routerLink="">Inicia sesion</a>
+    </p>
+  </div>
+</div>

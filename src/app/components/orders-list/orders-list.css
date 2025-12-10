@@ -1,0 +1,73 @@
+.table-container
+{
+  height: 350px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: block;
+}
+
+table
+{
+  width: 100%;
+}
+
+.mat-mdc-form-field
+{
+  font-size: 14px;
+  width: 100%;
+  margin: 9px;
+}
+
+.header
+{
+  margin-bottom: 10px;
+}
+
+td, th
+{
+  width: 25%;
+}
+
+.btnCompleted .btnDelete .btnCancel
+{
+  cursor: pointer;
+}
+
+.btnCompleted
+{
+  color: green;
+  margin-right: 1px;
+  margin-left: 1px;
+}
+
+.btnCancel
+{
+  color: red;
+}
+
+.btnDetails
+{
+  color: blue;
+}
+
+.completeState
+{
+  background-color: #4caf50 !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+.pendingState
+{
+  background-color: #ffeb3b !important; /* Yellow 500 */
+  color: white !important;               /* Texto oscuro para contraste */
+  font-weight: 600;
+}
+
+.cancelState
+{
+  background-color: #f44336 !important; /* Red 500 */
+  color: white !important;
+  font-weight: 600;
+}
+
