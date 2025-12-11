@@ -7,68 +7,70 @@
     {
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     }
-
-    <mat-form-field appearance="outline">
-      <mat-label></mat-label>
-      <input matInput (keyup)="applyFilter($event)" #input>
-    </mat-form-field>
     <div class="table-container mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort>
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-          <td mat-cell *matCellDef="let row">{{row.id}}</td>
-        </ng-container>
-        <ng-container matColumnDef="username">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
-          <td mat-cell *matCellDef="let row">{{row.username}}</td>
-        </ng-container>
-        <ng-container matColumnDef="total">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
-          <td mat-cell *matCellDef="let row">{{row.total | number:'1.2-2'}}</td>
-        </ng-container>
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de orden</th>
-          <td mat-cell *matCellDef="let row">{{row.orderDate | date:'dd/MM/yyyy'}}</td>
-        </ng-container>
-        <ng-container matColumnDef="state">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
-          <td mat-cell *matCellDef="let row">
-            @if(row.state == 'COMPLETED')
-            {
-              <mat-chip class="completeState">
-                {{row.nameState}}
-              </mat-chip>
-            }
+      <mat-form-field class="search-field" appearance="outline">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+        <mat-icon matPrefix>search</mat-icon>
+      </mat-form-field>
+      <div style="overflow-y: auto; height: 300px;">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let row">{{row.id}}</td>
+          </ng-container>
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
+            <td mat-cell *matCellDef="let row">{{row.username}}</td>
+          </ng-container>
+          <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
+            <td mat-cell *matCellDef="let row">{{row.total | number:'1.2-2'}}</td>
+          </ng-container>
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de orden</th>
+            <td mat-cell *matCellDef="let row">{{row.orderDate | date:'dd/MM/yyyy'}}</td>
+          </ng-container>
+          <ng-container matColumnDef="state">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let row">
+              @if(row.state == 'COMPLETED')
+              {
+                <mat-chip class="completeState">
+                  {{row.nameState}}
+                </mat-chip>
+              }
 
-            @if (row.state == 'PENDING')
-            {
-              <mat-chip class="pendingState">
-                {{row.nameState}}
-              </mat-chip>
-            }
+              @if (row.state == 'PENDING')
+              {
+                <mat-chip class="pendingState">
+                  {{row.nameState}}
+                </mat-chip>
+              }
 
-            @if (row.state == 'CANCEL')
-            {
-              <mat-chip class="cancelState">
-                {{row.nameState}}
-              </mat-chip>
-            }
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-          <td mat-cell *matCellDef="let row">
-            <mat-icon class="btnDetails" (click)="openModal(row.id)" matTooltip="detalle">info</mat-icon>
-            @if(row.state == 'PENDING')
-            {
-              <mat-icon class="btnCompleted" (click)="changeStatusOrder(row.id, 2)" matTooltip="Completado">check</mat-icon>
-              <mat-icon class="btnCancel" (click)="changeStatusOrder(row.id, 3)" matTooltip="Cancelar">close</mat-icon>
-            }
-          </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns sticky:true"></tr>
-        <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
-      </table>
+              @if (row.state == 'CANCEL')
+              {
+                <mat-chip class="cancelState">
+                  {{row.nameState}}
+                </mat-chip>
+              }
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+            <td mat-cell *matCellDef="let row">
+              <mat-icon class="btnDetails" (click)="openModal(row.id)" matTooltip="detalle">info</mat-icon>
+              @if(row.state == 'PENDING')
+              {
+                <mat-icon class="btnCompleted" (click)="changeStatusOrder(row.id, 2)" matTooltip="Completado">check</mat-icon>
+                <mat-icon class="btnCancel" (click)="changeStatusOrder(row.id, 3)" matTooltip="Cancelar">close</mat-icon>
+              }
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns sticky:true"></tr>
+          <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
+        </table>
+      </div>
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of orders"></mat-paginator>
     </div>
   </mat-card-content>

@@ -1,22 +1,32 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {Authservice} from '../../services/authservice';
 import {MatDialogModule, MatDialog} from '@angular/material/dialog';
+import {MatSidenavModule, MatSidenav} from '@angular/material/sidenav';
 import {Router, RouterOutlet} from '@angular/router';
 import Swal from 'sweetalert2';
 import {EditUser} from '../edit-user/edit-user';
+import {MatDivider, MatListItem, MatListItemIcon, MatListItemTitle, MatNavList} from '@angular/material/list';
 
 @Component({
   selector: 'app-home',
   imports: [
+    MatSidenavModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
     MatMenuModule,
+    MatTooltipModule,
+    MatNavList,
+    MatListItem,
+    MatListItemIcon,
+    MatListItemTitle,
+    MatDivider,
     RouterOutlet,
   ],
   templateUrl: './home.html',
@@ -25,7 +35,9 @@ import {EditUser} from '../edit-user/edit-user';
 })
 export class Home {
 
+  @ViewChild('sidenav') sidenav!: MatSidenav;
   isAdminRole: boolean = false;
+  isSidenavOpen: boolean = false;
 
   constructor(private _authservice: Authservice, private router: Router, private dialog: MatDialog) {
 
@@ -33,6 +45,11 @@ export class Home {
 
   ngOnInit() {
     this.validateAdminRole();
+  }
+
+  toggleSidenav()
+  {
+    this.sidenav?.toggle();
   }
 
   Logout(): void {

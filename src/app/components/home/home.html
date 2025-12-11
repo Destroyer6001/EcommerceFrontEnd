@@ -1,24 +1,54 @@
 <mat-toolbar class="toolbar">
-  <button matIconButton class="example-icon button" [matMenuTriggerFor]="menu" aria-label="Example icon-button with menu icon">
+  <button mat-icon-button (click)="sidenav.toggle()" class="menu-button" aria-label="Menu button">
     <mat-icon>menu</mat-icon>
   </button>
-  <mat-menu #menu="matMenu">
-    @if (isAdminRole)
-    {
-      <button mat-menu-item (click)="redirectLink('/home/adminList')">Panel de administradores</button>
-      <button mat-menu-item (click)="redirectLink('/home/categoryList')">Categorias de producto</button>
-      <button mat-menu-item (click)="redirectLink('/home/productList')">Productos</button>
-      <button mat-menu-item (click)="redirectLink('/home/ordersList')">Ordenes</button>
-      <button mat-menu-item (click)="redirectLink('/home/statictsList')">Reportes</button>
-    }
-  </mat-menu>
-  <span>Ecommerce</span>
+  <span class="brand-name">Ecommerce</span>
   <span class="example-spacer"></span>
-  <button matIconButton (click)="openDialog()" class="example-icon bottonSpacer button">
+  <button mat-icon-button (click)="openDialog()" class="account-button" matTooltip="Geston de cuenta">
     <mat-icon>manage_accounts</mat-icon>
   </button>
-  <button matIconButton (click)="Logout()" class="example-icon bottonSpacer button">
+  <button mat-icon-button (click)="Logout()" class="logout-button" matTooltip="Cerrar sesion">
     <mat-icon>exit_to_app</mat-icon>
   </button>
 </mat-toolbar>
-<router-outlet></router-outlet>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" class="sidenav" [opened]="isSidenavOpen">
+    <div class="sidenav-header">
+      <h3>Menu De Navegacion</h3>
+    </div>
+    <mat-nav-list>
+      @if(isAdminRole)
+      {
+        <mat-list-item class="listItem" (click)="redirectLink('/home/adminList'); sidenav.close()">
+          <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
+          <span matListItemTitle>Panel De Administradores</span>
+        </mat-list-item>
+
+        <mat-list-item class="listItem"  (click)="redirectLink('/home/categoryList'); sidenav.close()">
+          <mat-icon matListItemIcon>category</mat-icon>
+          <span matListItemTitle>Categorias de producto</span>
+        </mat-list-item>
+
+        <mat-list-item class="listItem" (click)="redirectLink('/home/productList'); sidenav.close()">
+          <mat-icon matListItemIcon>inventory_2</mat-icon>
+          <span matListItemTitle>Productos</span>
+        </mat-list-item>
+
+        <mat-list-item class="listItem" (click)="redirectLink('/home/ordersList'); sidenav.close()">
+          <mat-icon matListItemIcon>receipt_long</mat-icon>
+          <span matListItemTitle>Ordenes</span>
+        </mat-list-item>
+
+        <mat-list-item class="listItem" (click)="redirectLink('/home/statictsList'); sidenav.close()">
+          <mat-icon matListItemIcon>bar_chart</mat-icon>
+          <span matListItemTitle>Reportes</span>
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
