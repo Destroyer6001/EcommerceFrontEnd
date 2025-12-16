@@ -1,0 +1,71 @@
+<div class="search-bar">
+  <mat-form-field appearance="outline" class="compact-field">
+    <mat-label>Buscar productos</mat-label>
+    <input matInput (keyup)="findProducts($event)" placeholder="Nombre del producto">
+    <mat-icon class="search-icon" matPrefix>search</mat-icon>
+    <button mat-icon-button matSuffix (click)="clearFilterCategory()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
+<div class="categories-carousel">
+  <button mat-icon-button class="nav-btn prev-btn" (click)="scrollCategories(-1)">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+
+  <div class="categories-container-wrapper">
+    <div class="categories-container" #categoriesContainer>
+      @for(p of ListCategories; track p.id)
+      {
+        <button mat-button
+                (click)="selectCategory(p)"
+                class="category-btn">
+          {{p.name}}
+        </button>
+      }
+    </div>
+  </div>
+
+  <button mat-icon-button class="nav-btn next-btn" (click)="scrollCategories(1)">
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+
+</div>
+<div class="products-grid">
+  @for(p of ListProductAux; track p.id)
+  {
+    <mat-card class="product-card">
+      <div class="image-container">
+        <img [src]="p.image"
+             [alt]="p.name"
+             (error)="onImageError($event)"
+             class="product-image">
+      </div>
+      <div class="card-content">
+        <div class="product-name">
+          {{p.name}}
+        </div>
+        <div class="product-footer">
+          <span class="price">${{p.salePrice | number:'1.0-0'}}</span>
+          <span class="stock" [class.low]="p.stock < 10" [class.out]="p.stock === 0">
+              {{p.stock > 0 ? p.stock + ' unidad' : 'Agotado'}}
+              </span>
+        </div>
+      </div>
+      <div class="button-container">
+        <button mat-raised-button
+                color="primary"
+                [disabled]="p.stock === 0"
+                (click)="addCarShoop(p)"
+                class="add-btn">
+          <mat-icon>add_shopping_cart</mat-icon>
+          Agregar
+        </button>
+      </div>
+    </mat-card>
+  }
+</div>
+<br>
+<br>
+

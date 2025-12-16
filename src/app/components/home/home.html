@@ -46,6 +46,13 @@
 
         <mat-divider></mat-divider>
       }
+      @else
+      {
+        <mat-list-item class="listItem" (click)="redirectLink('/home/productsListCar'); sidenav.close()">
+          <mat-icon matListItemIcon>add_shopping_cart</mat-icon>
+          <span matListItemTitle>Productos</span>
+        </mat-list-item>
+      }
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="content">

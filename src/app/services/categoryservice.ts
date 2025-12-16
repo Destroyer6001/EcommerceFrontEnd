@@ -35,7 +35,7 @@ export class Categoryservice {
   IndexCategory(): Observable<Category[]> {
     const token = this._authService.getToken();
     const headers = new HttpHeaders({'content-type': 'application/json', Authorization: `Bearer ${token}`});
-    return this.http.get<ApiResponse<Category[]>>(`${this.apiUrl}/categories`, {headers}).pipe(
+    return this.http.get<ApiResponse<Category[]>>(`${this.apiUrl}/categories/getAll`, {headers}).pipe(
       map((res) => {
         if (!res.success)
         {

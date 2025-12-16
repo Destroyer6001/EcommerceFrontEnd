@@ -8,8 +8,10 @@ import {ProductList} from './components/product-list/product-list';
 import {InventoryAdjustmentList} from './components/inventory-adjustment-list/inventory-adjustment-list';
 import {OrdersList} from './components/orders-list/orders-list';
 import {StatictsList} from './components/staticts-list/staticts-list';
+import {ProductListCar} from './components/product-list-car/product-list-car';
 import {authGuard} from './guards/auth-guard';
 import {adminGuard} from  './guards/admin-guard';
+
 
 
 export const routes: Routes = [
@@ -22,5 +24,6 @@ export const routes: Routes = [
       {path: 'inventoryAdjustment/:id', component: InventoryAdjustmentList, canActivate: [adminGuard] },
       {path: 'ordersList', component: OrdersList, canActivate: [adminGuard] },
       {path: 'statictsList', component: StatictsList, canActivate: [adminGuard] },
+      {path: 'productsListCar', component: ProductListCar},
     ]},
 ];
