@@ -22,7 +22,7 @@ export const routes: Routes = [
       {path: 'categoryList', component: Categorylist, canActivate: [adminGuard]},
       {path: 'productList', component: ProductList, canActivate: [adminGuard]},
       {path: 'inventoryAdjustment/:id', component: InventoryAdjustmentList, canActivate: [adminGuard] },
-      {path: 'ordersList', component: OrdersList, canActivate: [adminGuard] },
+      {path: 'ordersList', component: OrdersList},
       {path: 'statictsList', component: StatictsList, canActivate: [adminGuard] },
       {path: 'productsListCar', component: ProductListCar},
     ]},

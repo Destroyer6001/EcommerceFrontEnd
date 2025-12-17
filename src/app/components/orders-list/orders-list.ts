@@ -4,6 +4,7 @@ import {OrderDetails} from '../../models/order-details';
 import {ChangeState} from '../../models/change-state';
 import {Router} from '@angular/router';
 import {OrderServices} from '../../services/order-services';
+import {Authservice} from '../../services/authservice';
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 import {MatTableModule, MatTableDataSource} from '@angular/material/table';
@@ -47,10 +48,11 @@ export class OrdersList implements AfterViewInit {
   dataSource: MatTableDataSource<OrderDetails>;
   isLoading: boolean = false;
   errorMessage: string = '';
+  isAdmin: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private router: Router, private _orderService: OrderServices, private dialog: MatDialog) {
+  constructor(private router: Router, private _orderService: OrderServices, private dialog: MatDialog, private _authService: Authservice) {
     this.dataSource = new MatTableDataSource();
   }
 
@@ -87,7 +89,45 @@ export class OrdersList implements AfterViewInit {
 
   ngOnInit(): void
   {
-    this.searchOrders();
+    this.isAdmin = this._authService.getRole() == 'ADMIN';
+
+    if (this.isAdmin)
+    {
+      this.searchOrders();
+    }
+    else
+    {
+      this.searchUserOrders();
+    }
+  }
+
+  searchUserOrders():void
+  {
+    this.isLoading = true;
+    const id = Number(this._authService.getUserId());
+
+    this._orderService.getOrdersUser(id).subscribe({
+      next: (result) =>
+      {
+        this.isLoading = false;
+        this.dataSource.data = result.map(item => ({
+          ...item,
+          nameState: item.state == 'PENDING' ? 'Pendiente' : item.state == 'COMPLETED' ? 'Completado' : 'Cancelado',
+        }));
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
+      },
+      error: (err) =>
+      {
+        this.errorMessage = err.message;
+        Swal.fire({
+          'icon': 'error',
+          'title': 'Ha ocurrido un error',
+          'text': this.errorMessage,
+        });
+      }
+    })
   }
 
   searchOrders():void

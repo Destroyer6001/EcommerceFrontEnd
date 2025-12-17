@@ -11,6 +11,7 @@ import {Router, RouterOutlet} from '@angular/router';
 import Swal from 'sweetalert2';
 import {EditUser} from '../edit-user/edit-user';
 import {MatDivider, MatListItem, MatListItemIcon, MatListItemTitle, MatNavList} from '@angular/material/list';
+import {ProductsCar} from '../products-car/products-car';
 
 @Component({
   selector: 'app-home',
@@ -81,6 +82,18 @@ export class Home {
       maxWidth: '500px',
       disableClose: true
     });
+
+    dialogRef.afterClosed().subscribe(result => {})
+  }
+
+  openCarProductDialog(): void
+  {
+    const dialogRef = this.dialog.open(ProductsCar,
+      {
+        width: '750px',
+        maxWidth: '95vw',
+        disableClose: true
+      });
 
     dialogRef.afterClosed().subscribe(result => {})
   }

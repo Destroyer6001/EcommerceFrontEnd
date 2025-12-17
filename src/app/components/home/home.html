@@ -4,6 +4,12 @@
   </button>
   <span class="brand-name">Ecommerce</span>
   <span class="example-spacer"></span>
+  @if(!isAdminRole)
+  {
+    <button mat-icon-button (click)="openCarProductDialog()" class="account-button" matTooltip="Carrito de compras">
+      <mat-icon>add_shopping_cart</mat-icon>
+    </button>
+  }
   <button mat-icon-button (click)="openDialog()" class="account-button" matTooltip="Geston de cuenta">
     <mat-icon>manage_accounts</mat-icon>
   </button>
@@ -51,6 +57,11 @@
         <mat-list-item class="listItem" (click)="redirectLink('/home/productsListCar'); sidenav.close()">
           <mat-icon matListItemIcon>add_shopping_cart</mat-icon>
           <span matListItemTitle>Productos</span>
+        </mat-list-item>
+
+        <mat-list-item class="listItem" (click)="redirectLink('/home/ordersList'); sidenav.close()">
+          <mat-icon matListItemIcon>receipt_long</mat-icon>
+          <span matListItemTitle>Mis ordenes</span>
         </mat-list-item>
       }
     </mat-nav-list>

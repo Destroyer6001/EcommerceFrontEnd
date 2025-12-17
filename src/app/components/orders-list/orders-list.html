@@ -59,11 +59,16 @@
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
             <td mat-cell *matCellDef="let row">
+
               <mat-icon class="btnDetails" (click)="openModal(row.id)" matTooltip="detalle">info</mat-icon>
+
               @if(row.state == 'PENDING')
               {
-                <mat-icon class="btnCompleted" (click)="changeStatusOrder(row.id, 2)" matTooltip="Completado">check</mat-icon>
                 <mat-icon class="btnCancel" (click)="changeStatusOrder(row.id, 3)" matTooltip="Cancelar">close</mat-icon>
+              }
+              @if(row.state == 'PENDING' && isAdmin)
+              {
+                <mat-icon class="btnCompleted" (click)="changeStatusOrder(row.id, 2)" matTooltip="Completado">check</mat-icon>
               }
             </td>
           </ng-container>

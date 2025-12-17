@@ -1,0 +1,70 @@
+<h2 mat-dialog-title class="title-with-icon">
+  <mat-icon (click)="closeModal()" matTooltip="Cerrar Carrito">close</mat-icon>
+  Carrito De Compras
+</h2>
+
+<mat-dialog-content>
+    @if(car.length === 0)
+    {
+      <div class="empty-cart">
+        <mat-icon>shopping_cart</mat-icon>
+        <p>Tu carrito esta vacio</p>
+      </div>
+    }
+    @else
+    {
+      <div class="row">
+        <div class="column">
+          <div class="table-container mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Producto</th>
+                <td mat-cell *matCellDef="let row">{{row.name}}</td>
+              </ng-container>
+              <ng-container matColumnDef="salePrice">
+                <th mat-header-cell *matHeaderCellDef>Precio De Venta</th>
+                <td mat-cell *matCellDef="let row">${{row.unitPrice | number: '1.0-0'}}</td>
+              </ng-container>
+              <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-form-field appearance="fill">
+                    <input matInput [value]="row.stock" (keyup)="updateProduct(row.id, $event)">
+                  </mat-form-field>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="subtotal">
+                <th mat-header-cell *matHeaderCellDef>SubTotal</th>
+                <td mat-cell *matCellDef="let row">
+                  ${{getSubtotalProduct(row) | number: '1.0-0'}}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-icon class="btnDelete" (click)="removeItemCar(row.id)" matTooltip="Eliminar producto">delete</mat-icon>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row total-row">
+        <div class="column">
+          <h3>
+            <span class="label">Total a pagar:</span>
+            <span class="amount">${{getTotal() | number: '1.0-0'}}</span>
+          </h3>
+        </div>
+      </div>
+    }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button matButton type="button" color="primary" [disabled]="car.length === 0" (click)="saveOrder()">
+    <mat-icon>send</mat-icon> Enviar Pedido
+  </button>
+</mat-dialog-actions>

@@ -8,8 +8,11 @@ import {ProductService} from '../../services/product-service';
 import {Categoryservice} from '../../services/categoryservice';
 import {Category} from '../../models/category';
 import {ProductDetails} from '../../models/product-details';
+import {ProductCarService} from '../../services/product-car-service';
+import {ProductsCar} from '../products-car/products-car';
 import Swal from 'sweetalert2';
 import {DecimalPipe} from '@angular/common';
+import {ProductCar} from '../../models/product-car';
 
 @Component({
   selector: 'app-product-list-car',
@@ -32,7 +35,7 @@ export class ProductListCar {
   ListCategories: Category[] = [];
   errorMessage: string = '';
 
-  constructor(private _productService: ProductService, private _categoryService: Categoryservice) {
+  constructor(private _productService: ProductService, private _categoryService: Categoryservice, private _productCarService: ProductCarService) {
   }
 
   ngOnInit():void
@@ -58,7 +61,20 @@ export class ProductListCar {
 
   addCarShoop(product: ProductDetails): void
   {
+      const productCar: ProductCar = {
+        id: product.id,
+        stock: product.stock,
+        name: product.name,
+        unitPrice: product.salePrice
+      };
 
+      this._productCarService.addCard(productCar);
+
+      Swal.fire({
+        icon: "success",
+        title: 'Exito',
+        text: 'Producto agregado con exito'
+      })
   }
 
   onImageError(event: Event): void

@@ -1,4 +1,4 @@
-import {Component, AfterViewInit, inject, ViewChild} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FormBuilder, Validators, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
@@ -9,8 +9,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {OrderServices} from '../../services/order-services';
 import Swal from 'sweetalert2';
 import {MatTableModule, MatTableDataSource} from '@angular/material/table';
-import {MatSortModule, MatSort} from '@angular/material/sort';
-import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {OrderDetails} from '../../models/order-details';
@@ -27,8 +25,6 @@ import {DecimalPipe} from '@angular/common';
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    MatPaginatorModule,
-    MatSortModule,
     MatTableModule,
     MatDatepickerModule,
     MatTooltipModule,
@@ -37,7 +33,7 @@ import {DecimalPipe} from '@angular/common';
   templateUrl: './order-details-modal.html',
   styleUrl: './order-details-modal.css',
 })
-export class OrderDetailsModal implements AfterViewInit
+export class OrderDetailsModal
 {
   displayedColumns: string [] = ['productName', 'stock', 'salePrice', 'total']
   dataSource: MatTableDataSource<OrderProductsDetailsUser>;
@@ -45,8 +41,6 @@ export class OrderDetailsModal implements AfterViewInit
   messageError: string = '';
   data = inject<any>(MAT_DIALOG_DATA)
   id: number
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private fb: FormBuilder, private _orderService: OrderServices, private dialogRef: MatDialogRef<OrderDetailsModal>)
   {
@@ -59,12 +53,6 @@ export class OrderDetailsModal implements AfterViewInit
       total: ['', Validators.required],
       address: ['', Validators.required],
     });
-  }
-
-  ngAfterViewInit()
-  {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   closeModal()
@@ -87,8 +75,6 @@ export class OrderDetailsModal implements AfterViewInit
           ...item,
           totalProduct: item.salePrice * item.stock
         }));
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
 
         this.formDetails.setValue({
           userName: resp.username,

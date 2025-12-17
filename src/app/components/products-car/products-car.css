@@ -1,0 +1,135 @@
+.column
+{
+  display:flex;
+}
+
+.row
+{
+  display:flex;
+  gap: 10px;
+}
+
+.table-container
+{
+  height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: block;
+}
+
+.table
+{
+  width: 100%;
+}
+
+
+.mat-column-quantity
+{
+  min-width: 115px;
+  max-width: 115px;
+}
+
+.mat-column-name
+{
+  min-width: 215px;
+  max-width: 215px;
+}
+
+.mat-column-actions
+{
+  min-width: 100px;
+  max-width: 100px;
+}
+
+mat-dialog-actions button[mat-button]
+{
+  min-width: 150px;
+  padding: 16px 24px;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+mat-dialog-actions button
+{
+  background-color: #3f51b5;
+  color: white;
+}
+
+.total-row
+{
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 15px 15px;
+}
+
+h3 .label
+{
+  font-size: 18px;
+  color: #666666;
+  font-weight: 500;
+}
+
+h3 .amount
+{
+  font-size: 28px;
+  color: #3f51b5;
+  font-weight: 500;
+}
+
+.empty-cart
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #999;
+}
+
+.empty-cart mat-icon
+{
+  font-size: 60px;
+  height: 60px;
+  width: 60px;
+  margin-bottom: 16px;
+}
+
+.title-with-icon
+{
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.title-with-icon mat-icon
+{
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s;
+}
+
+.title-with-icon mat-icon:hover
+{
+  color: #f44336;
+}
+
+mat-form-field
+{
+  width: 80%;
+}
+
+mat-form-field .mat-form-field-wrapper
+{
+  padding-bottom: 0;
+}
+
+mat-form-field .mat-form-field-underline
+{
+  bottom: 0;
+}
+
+.btnDelete
+{
+  color: red;
+}
