@@ -1,0 +1,66 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title class="title-with-icon">
+      <mat-icon (click)="redirectedDeliveryList()" matTooltip="Regresar a la lista de domiciliarios">arrow_back</mat-icon>
+      Gestion de domicilios de {{this.deliveryName}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @if(isLoading)
+    {
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
+    <div class="table-container mat-elevation-z8">
+      <div class="search-add-container">
+        <mat-form-field class="search-field" appearance="outline">
+          <mat-label>Buscar</mat-label>
+          <input matInput (keyup)="applyFilter($event)" #event>
+          <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+      </div>
+      <div style="overflow-y: auto; height: 300px">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+            <td mat-cell *matCellDef="let row">{{row.id}}</td>
+          </ng-container>
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de solicitud</th>
+            <td mat-cell *matCellDef="let row">{{row.date | date: 'dd/MM/yyyy'}}</td>
+          </ng-container>
+          <ng-container matColumnDef="state">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let row">
+              @if (row.state == 'COMPLETED')
+              {
+                <mat-chip class="completedState">
+                  {{row.stateName}}
+                </mat-chip>
+              }
+              @if (row.state == 'PENDING')
+              {
+                <mat-chip class="pendingState">
+                  {{row.stateName}}
+                </mat-chip>
+              }
+              @if(row.state == 'CANCEL')
+              {
+                <mat-chip class="cancelState">
+                  {{row.stateName}}
+                </mat-chip>
+              }
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="deliveryDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de entrega</th>
+            <td mat-cell *matCellDef="let row">{{row.deliveryDate ?  (row.deliveryDate | date: 'dd/MM/yyy') : ' '}}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns sticky:true"></tr>
+          <tr mat-row *matRowDef="let row; columns:displayedColumns"></tr>
+        </table>
+      </div>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page shipments"></mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>
+

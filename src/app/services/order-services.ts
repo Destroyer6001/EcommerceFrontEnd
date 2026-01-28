@@ -9,6 +9,7 @@ import {Order} from '../models/order';
 import {Authservice} from './authservice';
 import {ChangeState} from '../models/change-state';
 import {ReportTotals} from '../models/report-totals';
+import {UserDetails} from '../models/user-details';
 
 @Injectable({
   providedIn: 'root',
@@ -95,14 +96,14 @@ export class OrderServices {
     )
   }
 
-  changeStatusOrder(status: ChangeState): Observable<ChangeState>
+  cancelOrder(orderId: Number): Observable<Number>
   {
     const token = this._authServices.getToken();
     const headers = new HttpHeaders({'Content-Type': 'application/json', Authorization: `Bearer ${token}`});
 
-    return this.http.post<ApiResponse<ChangeState>>(`${this.apiUrl}/orders/changeState`, status, {headers}).pipe(
+    return this.http.patch<ApiResponse<Number>>(`${this.apiUrl}/orders/cancelOrder/${orderId}`, null, {headers}).pipe(
       map((res) => {
-
+        console.log(res);
         if (!res.success)
         {
           throw Error(res.message);

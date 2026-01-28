@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {OrderServices} from '../../services/order-services';
+import {PayslipService} from '../../services/payslip-service';
+import {ShipmentService} from '../../services/shipment-service';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { Chart } from 'chart.js/auto';
@@ -17,7 +19,7 @@ import Swal from 'sweetalert2';
 export class StatictsList {
 
   errorMessage: string = '';
-  constructor(private _orderService: OrderServices) {
+  constructor(private _orderService: OrderServices, private _shipmentService: ShipmentService, private _payslipsService: PayslipService) {
   }
 
   ngOnInit(): void
@@ -26,6 +28,8 @@ export class StatictsList {
     this.searchEarningsProduct();
     this.searchMaxSalesCategories();
     this.searchEarningsCategories();
+    this.searchShipmentsDeliveriesUsers();
+    this.searchTotalPayDeliveryUsers();
     this.searchStatesOrders();
   }
 
@@ -188,6 +192,61 @@ export class StatictsList {
     });
   }
 
+  searchTotalPayDeliveryUsers(): void
+  {
+    this._payslipsService.reportPayslipUsers().subscribe({
+      next: (resp) =>
+      {
+        const labels = resp.map(item => item.name);
+        const values = resp.map(item => item.total);
+
+        new Chart("TotalPayDeliveryUser", {
+          type: "pie",
+          data: {
+            labels: labels,
+            datasets: [{
+              label: "Pagos por domiciliario",
+              data: values,
+              backgroundColor: values.map(() => {
+                const r = Math.floor(Math.random()*255);
+                const g = Math.floor(Math.random()*255);
+                const b = Math.floor(Math.random()*255);
+
+                return `rgba(${r}, ${g}, ${b}, 0.6)`;
+              }),
+              borderColor: values.map(() => {
+                const r = Math.floor(Math.random()*255);
+                const g = Math.floor(Math.random()*255);
+                const b = Math.floor(Math.random()*255);
+
+                return `rgba(${r}, ${g}, ${b}, 1)`;
+              }),
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'right'
+              }
+            }
+          }
+        });
+      },
+      error: (err) =>
+      {
+        this.errorMessage = err.message;
+        Swal.fire({
+          title: 'Ha ocurrido un error',
+          text: this.errorMessage,
+          icon: 'error',
+        });
+      }
+    });
+  }
+
   searchEarningsCategories(): void
   {
     this._orderService.reportSalesCategories().subscribe({
@@ -241,6 +300,59 @@ export class StatictsList {
     });
   }
 
+  searchShipmentsDeliveriesUsers():void
+  {
+    this._shipmentService.reportShipmentsUser().subscribe({
+      next: (resp) =>
+      {
+        const labels = resp.map(item => item.name);
+        const values = resp.map(item => item.total);
+
+        new Chart("ShipmentsUser", {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [{
+              label: "Total de envios por domiciliario",
+              data: values,
+              backgroundColor: values.map(() => {
+                const r = Math.floor(Math.random() * 255);
+                const g = Math.floor(Math.random() * 255);
+                const b = Math.floor(Math.random() * 255);
+                return `rgba(${r}, ${g}, ${b}, 0.6)`;
+              }),
+              borderColor: values.map(() => {
+                const r = Math.floor(Math.random() * 255);
+                const g = Math.floor(Math.random() * 255);
+                const b = Math.floor(Math.random() * 255);
+                return `rgba(${r}, ${g}, ${b}, 1)`;
+              }),
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'right'
+              }
+            }
+          }
+        });
+      },
+      error: (err) =>
+      {
+        this.errorMessage = err.message;
+        Swal.fire({
+          icon: 'error',
+          title: 'Ha ocurrido un error',
+          text: this.errorMessage,
+        })
+      }
+    })
+  }
+
   searchStatesOrders(): void
   {
     this._orderService.reportStatesOrders().subscribe({
@@ -249,9 +361,9 @@ export class StatictsList {
         const labels = resp.map(item =>
         item.name == 'PENDING' ? 'Pendiente':
         item.name == 'COMPLETED' ? 'Completado':
-        'Cancelado');
+        item.name == 'CANCEL'? 'Cancelado':
+        'ENVIADO');
 
-        console.log(labels);
         const values = resp.map(item => item.total);
 
         new Chart("StatesOrders", {

@@ -45,6 +45,11 @@
           <span matListItemTitle>Ordenes</span>
         </mat-list-item>
 
+        <mat-list-item class="listItem" (click)="redirectLink('/home/deliveryList'); sidenav.close()">
+          <mat-icon matListItemIcon>local_shipping</mat-icon>
+          <span matListItemTitle>Domiciliarios</span>
+        </mat-list-item>
+
         <mat-list-item class="listItem" (click)="redirectLink('/home/statictsList'); sidenav.close()">
           <mat-icon matListItemIcon>bar_chart</mat-icon>
           <span matListItemTitle>Reportes</span>

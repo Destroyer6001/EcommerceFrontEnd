@@ -18,7 +18,7 @@ import {MatDialogModule, MatDialog} from '@angular/material/dialog';
 import {AdminModal} from '../admin-modal/admin-modal';
 
 @Component({
-  selector: 'app-admin-list',
+  selector: 'app-delivery-list',
   imports: [
     MatCardModule,
     MatSortModule,
@@ -26,6 +26,7 @@ import {AdminModal} from '../admin-modal/admin-modal';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatInputModule,
     MatProgressBarModule,
     MatIconModule,
     MatToolbarModule,
@@ -34,20 +35,20 @@ import {AdminModal} from '../admin-modal/admin-modal';
     MatDialogModule,
   ],
   standalone: true,
-  templateUrl: './admin-list.html',
-  styleUrl: './admin-list.css',
+  templateUrl: './delivery-list.html',
+  styleUrl: './delivery-list.css',
 })
+export class DeliveryList implements AfterViewInit{
 
-export class AdminList implements AfterViewInit{
-  displayedColumns: string[] = ['id', 'username', 'fullname', 'email', 'phone', 'actions'];
+  displayedColumns:string[] = ['id', 'username', 'fullname', 'email', 'phone', 'actions'];
   dataSource: MatTableDataSource<UserDetails>;
-  isLoading = false;
-  errorMessage: string = '';
+  isLoading: boolean = false;
+  errorMsg: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private router: Router, private _authServices: Authservice, private dialog: MatDialog)
+  constructor(private router: Router, private _authServices:Authservice, private dialog: MatDialog)
   {
     this.dataSource = new MatTableDataSource();
   }
@@ -58,31 +59,32 @@ export class AdminList implements AfterViewInit{
     this.dataSource.sort = this.sort;
   }
 
-  openDialog(id: number) : void
+  openDialog(id:number) : void
   {
     const dialogRef = this.dialog.open(AdminModal, {
       width: '500px',
       maxWidth: '90vw',
       disableClose: true,
-      data: {id: id, userType: 1}
+      data: {id: id, userType: 3}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == true)
       {
-        this.IndexUser();
+        this.indexUser();
       }
     });
   }
 
-  ngOnInit()
+  ngOnInit():void
   {
-    this.IndexUser();
+    this.indexUser();
   }
 
-  IndexUser(): void {
+  indexUser():void
+  {
     this.isLoading = true;
-    this._authServices.findAdminsUsers().subscribe({
+    this._authServices.getDeliveriesUser().subscribe({
       next: (data) => {
         this.isLoading = false;
 
@@ -94,9 +96,10 @@ export class AdminList implements AfterViewInit{
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
-      error: (err) => {
+      error: (error) =>
+      {
         this.isLoading = false;
-        this.errorMessage = err.message;
+        this.errorMsg = error.message;
         this.dataSource.data = [];
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -104,13 +107,13 @@ export class AdminList implements AfterViewInit{
         Swal.fire({
           icon: 'error',
           title: 'Ha ocurrido un error',
-          text: this.errorMessage,
+          text: this.errorMsg
         });
       }
     });
   }
 
-  deleteUser(id: number) : void
+  deleteUser(id:number):void
   {
     this._authServices.deleteAdminUser(id).subscribe({
       next: (data) =>
@@ -118,29 +121,41 @@ export class AdminList implements AfterViewInit{
         Swal.fire({
           icon: 'success',
           title: 'Exito',
-          text: ' Se ha eliminado con exito el usuario',
+          text: 'Se ha eliminado con exito el usuario seleccionado'
         });
-        this.IndexUser();
+        this.indexUser();
       },
-      error: (err) =>
+      error: (error) =>
       {
-        this.errorMessage = err.message;
+        this.errorMsg = error.message;
         Swal.fire({
           icon: 'error',
           title: 'Ha ocurrido un error',
-          text: this.errorMessage,
+          text: this.errorMsg
         });
-        this.IndexUser();
+        this.indexUser();
       }
     });
   }
 
-  confirmDeleteUser(id: number) : void
+  redirectedLink(id:number, typeUrl: number): void
+  {
+    if (typeUrl == 1)
+    {
+      this.router.navigateByUrl(`/home/payslipsList/${id}`);
+    }
+    else
+    {
+      this.router.navigateByUrl(`/home/shipmentsList/${id}`);
+    }
+  }
+
+  confirmDeleteUser(id:number):void
   {
     Swal.fire({
       title: "Advertencia",
       icon: "warning",
-      text: "Esta seguro de querer eliminar al usuario",
+      text: "Esta seguro de querer eliminar el usuario",
       showCancelButton: true,
       confirmButtonText: "Si, Eliminar",
       cancelButtonText: "Cancelar",

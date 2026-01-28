@@ -1,0 +1,139 @@
+.table-container-wrapper
+{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+mat-card
+{
+  max-width: 1450px;
+  margin: 20px auto;
+  display: block;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.table-container
+{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 300px;
+  overflow: hidden;
+}
+
+.mat-elevation-z8
+{
+  box-shadow:
+    0 3px 5px -1px rgba(0, 0, 0, 0.15),
+    0 6px 10px 0 rgba(0, 0, 0, 0.10),
+    0 1px 18px 0 rgba(0, 0, 0, 0.08) !important;
+  border-right: 8px;
+  overflow: hidden;
+}
+
+mat-card-content
+{
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+}
+
+.table-container-table
+{
+  flex: 1;
+}
+
+mat-paginator
+{
+  margin-top: auto;
+  flex-shrink: 0;
+  border-top: 1px solid #e0e0e0;
+  background: white;
+  position: static;
+  bottom: 0;
+}
+
+.search-field .mat-mdc-form-field-outline
+{
+  color: #e0e0e0;
+}
+
+.search-field .mat-mdc-icon-prefix
+{
+  color: #666;
+  margin-right: 8px;
+}
+
+.search-field {
+  flex: 1;
+  font-size: 14px;
+}
+
+.add-button-icon {
+  flex-shrink: 0;
+  background-color: #3f51b5;
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.add-button-icon:hover {
+  background-color: #303f9f;
+}
+
+.search-add-container
+{
+  display: flex;
+  align-items: center;
+  gap:12px;
+  margin: 9px;
+  margin-bottom: 16px;
+  width: 98%;
+}
+
+table {
+  width: 100%;
+}
+
+.header {
+  margin-bottom: 10px;
+}
+
+td, th {
+  width: 20%;
+}
+
+.btnDelete {
+  color: red;
+}
+
+.btnPayment
+{
+  color: green;
+}
+
+.btnDelivery
+{
+  color: blue;
+}
+
+.btnEdit {
+  color: yellow;
+}
+
+.actions
+{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.actions mat-icon {
+  cursor: pointer;
+  font-size: 20px;
+}

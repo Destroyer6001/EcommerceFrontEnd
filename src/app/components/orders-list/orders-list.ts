@@ -112,7 +112,7 @@ export class OrdersList implements AfterViewInit {
         this.isLoading = false;
         this.dataSource.data = result.map(item => ({
           ...item,
-          nameState: item.state == 'PENDING' ? 'Pendiente' : item.state == 'COMPLETED' ? 'Completado' : 'Cancelado',
+          nameState: item.state == 'PENDING' ? 'Pendiente' : item.state == 'COMPLETED' ? 'Completado' : item.state == 'SEND' ? 'Enviado' : 'Cancelado',
         }));
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -159,14 +159,9 @@ export class OrdersList implements AfterViewInit {
     });
   }
 
-  changeStatusOrder(orderId: number, state: number)
+  changeStatusOrder(orderId: number)
   {
-    const stateOrder: ChangeState = {
-        orderId: orderId,
-        state: state,
-    }
-
-    this._orderService.changeStatusOrder(stateOrder).subscribe({
+    this._orderService.cancelOrder(orderId).subscribe({
       next: (data) =>
       {
         Swal.fire({
@@ -174,17 +169,33 @@ export class OrdersList implements AfterViewInit {
           title: 'Exito',
           text: 'Se ha actualizado con exito el estado de la orden'
         });
-        this.searchOrders();
+
+        if (this.isAdmin)
+        {
+          this.searchOrders();
+        }
+        else
+        {
+          this.searchUserOrders();
+        }
       },
       error: (error) =>
       {
         this.errorMessage = error.message;
-        this.searchOrders();
         Swal.fire({
           icon: 'error',
           title: 'Ha ocurrido un error',
           text: this.errorMessage
         });
+
+        if (this.isAdmin)
+        {
+          this.searchOrders();
+        }
+        else
+        {
+          this.searchUserOrders();
+        }
       }
     });
   }

@@ -34,6 +34,7 @@ export class AdminModal {
   title= 'Crear';
   data = inject<any>(MAT_DIALOG_DATA);
   id: number;
+  userType: number;
 
   constructor(private _authServices: Authservice, private dialogRef: MatDialogRef<AdminModal>, private fb: FormBuilder) {
 
@@ -48,6 +49,7 @@ export class AdminModal {
     });
 
     this.id = this.data.id;
+    this.userType = this.data.userType
   }
 
   ngOnInit() {
@@ -174,7 +176,7 @@ export class AdminModal {
         address: this.formUser.value.address,
         email: this.formUser.value.email,
         id: 0,
-        typeUser: 1,
+        typeUser: this.userType,
         password: this.formUser.value.password != '' ? this.formUser.value.password : '',
       };
 

@@ -41,6 +41,13 @@
                 </mat-chip>
               }
 
+              @if (row.state == 'SEND')
+              {
+                <mat-chip class="pendingDelivery">
+                  {{row.nameState}}
+                </mat-chip>
+              }
+
               @if (row.state == 'PENDING')
               {
                 <mat-chip class="pendingState">
@@ -64,11 +71,7 @@
 
               @if(row.state == 'PENDING')
               {
-                <mat-icon class="btnCancel" (click)="changeStatusOrder(row.id, 3)" matTooltip="Cancelar">close</mat-icon>
-              }
-              @if(row.state == 'PENDING' && isAdmin)
-              {
-                <mat-icon class="btnCompleted" (click)="changeStatusOrder(row.id, 2)" matTooltip="Completado">check</mat-icon>
+                <mat-icon class="btnCancel" (click)="changeStatusOrder(row.id)" matTooltip="Cancelar">close</mat-icon>
               }
             </td>
           </ng-container>

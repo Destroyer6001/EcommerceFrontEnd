@@ -140,6 +140,23 @@ export class Authservice {
     )
   }
 
+  getDeliveriesUser():Observable<UserDetails[]>
+  {
+    const token = this.getToken();
+    const headers = new HttpHeaders({'Content-Type': 'application/json', Authorization: `Bearer ${token}`});
+
+    return this.http.get<ApiResponse<UserDetails[]>>(`${this.apiUrl}/users/getAllDeliveries`, {headers}).pipe(
+      map((res) => {
+        if (!res.success)
+        {
+          throw Error (res.message);
+        }
+
+        return res.data;
+      }),
+      catchError(this.handleError)
+    )
+  }
 
   logout() : void
   {
